@@ -85,7 +85,6 @@ bot.on("msg", async (ctx) => {
         const cleanedText = tweetText.replace(tcoRegex, "");
         return cleanedText;
       }
-      console.log(response);
       if (response.found && response.type === "image") {
         const postDesc = await removeTcoLinks(response.tweet_user.text);
         await ctx.replyWithPhoto(response.download, {
