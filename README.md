@@ -28,7 +28,7 @@ Download media from tweets in Telegram!
 
 ### Mechanism
 
-The bot takes uses the twitter-url-direct lib to get direct download links for Twitter media.
+The bot uses the twitter-url-direct lib to get direct download links for Twitter media.
 
 <br>
 
