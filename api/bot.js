@@ -1,7 +1,6 @@
 require("dotenv").config();
-const { Bot, HttpError, GrammyError } = require("grammy");
+const { Bot, webhookCallback, HttpError, GrammyError } = require("grammy");
 const twitterGetUrl = require("twitter-url-direct");
-const path = require("path");
 
 // Bot
 
@@ -52,6 +51,7 @@ bot.on("msg", async (ctx) => {
   console.log(
     `From: ${name} (@${from.username}) ID: ${from.id}\nMessage: ${ctx.msg.text}`
   );
+
   // Logic
   if (ctx.msg.text.includes("t.co")) {
     await ctx.reply("*Short links are not supported presently.*", {
@@ -85,7 +85,6 @@ bot.on("msg", async (ctx) => {
         const cleanedText = tweetText.replace(tcoRegex, "");
         return cleanedText;
       }
-      console.log(response);
       if (response.found && response.type === "image") {
         const postDesc = await removeTcoLinks(response.tweet_user.text);
         await ctx.replyWithPhoto(response.download, {
@@ -166,4 +165,4 @@ bot.catch((err) => {
 
 // Run
 
-bot.start();
+export default webhookCallback(bot, "http");
